@@ -11,6 +11,16 @@ function App() {
   //const { count } = useSelector((state: RootState) => state.counter);
   const { count } = useAppSelector((state) => state.counter);
   const dispatch = useAppDispatch();
+
+  const generateSpans = () => {
+    const numSpans = Math.floor(count / 5); // 5 দিয়ে ভাগ করে Span-এর সংখ্যা নির্ধারণ
+    const spans = [];
+    for (let i = 0; i < numSpans; i++) {
+      spans.push(<span key={i} className="h-5 w-5 bg-red-500 mx-1"></span>);
+    }
+    return spans;
+  };
+
   return (
     <div className="h-screen w-full flex justify-center items-center">
       <div className="flex border border-purple-300 rounded-md bg-slate-50 p-10">
@@ -21,6 +31,7 @@ function App() {
           Increment
         </button>
         <h1 className="text-3xl mx-10">{count}</h1>
+
         <button
           onClick={() => dispatch(decrement())}
           className="px-3 py-2 rounded-md bg-green-500 text-xl font-semibold text-white"
@@ -34,6 +45,7 @@ function App() {
           Increment By Value
         </button>
       </div>
+      <div className="flex clear-both">{generateSpans()}</div>
     </div>
   );
 }
